@@ -24,11 +24,11 @@ const getSubCategoriesByCategory = async (req, res) => {
 const createSubCategory =  async (req, res) => { // pending
     const body = req.body;
     try {
-        const subCategories = await SubCategory.create({
+        const subCategory = await SubCategory.create({
             name: body.name,
             category: body.category,
         });
-        res.json({ status: true, data: subCategories });
+        res.json({ status: true, data: subCategory });
     } catch (err) {
         res.json({ status: false, message: err.message });
     }
