@@ -1,5 +1,5 @@
 const express = require('express');
-const SubCategory = require('../routes/sub_category.route')
+const SubCategory = require('../models/sub_category.model')
 
 const getAllSubCategories = async (req, res) => {
     try {
@@ -36,9 +36,7 @@ const createSubCategory =  async (req, res) => { // pending
 
 const deleteSubCategory = async (req, res) => {
     try {
-        const subCategory = await SubCategory.findByIdAndDelete({
-            category: req.params.id,
-        });
+        const subCategory = await SubCategory.findByIdAndDelete(req.params.id);
         res.json({ status: true, data: subCategory });
     } catch (err) {
         res.json({ status: false, message: err.message });

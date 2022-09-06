@@ -1,4 +1,4 @@
-const moongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const subCategorySchema = mongoose.Schema({
     name: {
@@ -7,7 +7,7 @@ const subCategorySchema = mongoose.Schema({
         required: true,
     },
     category: {
-        type: moongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'category',
     }
 },
@@ -17,4 +17,4 @@ const subCategorySchema = mongoose.Schema({
     }
 )
 
-module.exports = moongoose.model("subcategory", subCategorySchema);
+module.exports = mongoose.model("subcategory", subCategorySchema);
