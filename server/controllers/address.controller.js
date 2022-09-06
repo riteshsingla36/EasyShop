@@ -1,4 +1,3 @@
-const express = require('express');
 const AddressSchema = require('../models/address.model');
 
 const getAddresses = async (req, res) => {

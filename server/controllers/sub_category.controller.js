@@ -1,4 +1,3 @@
-const express = require('express');
 const SubCategory = require('../models/sub_category.model')
 
 const getAllSubCategories = async (req, res) => {

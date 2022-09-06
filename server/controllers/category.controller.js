@@ -1,4 +1,3 @@
-const express = require('express');
 const Category = require('../models/category.model');
 
 const updateCategory = async (req, res) => {
