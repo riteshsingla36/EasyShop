@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const orderSchema = mongoose.Schema({ //deliveryAddress, (enum use in nodejs)
+const orderSchema = mongoose.Schema({
 
     products: [{
         type: Object,
