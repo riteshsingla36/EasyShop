@@ -4,8 +4,6 @@ const orderSchema = mongoose.Schema({
 
     products: [{
         type: Object,
-        ref: 'Product',
-        required: true
     }],
 
     user: {
@@ -16,8 +14,7 @@ const orderSchema = mongoose.Schema({
 
     paymentStatus: {
         type: String,
-        enum: ['FAILED', 'CAPTURED', 'SETTLED', 'TRANSFERED'],
-        required: true,
+        enum: ['FAILED', 'CAPTURED', 'SETTLED', 'TRANSFERRED'],
         default: 'CAPTURED',
     },
 
@@ -30,25 +27,23 @@ const orderSchema = mongoose.Schema({
     status: {
         type: String,
         enum: ['DELIVERED', 'CANCELLED', 'EXPIRED', 'PENDING', 'CONFIRMED'],
-        required: true,
         default: 'PENDING',
     },
 
     deliveryStatus: {
         type: String,
         enum: ['CANCELLED', 'DELIVERED', 'PENDING', 'CONFIRMED', 'EXPIRED'],
-        required: true,
         default: 'PENDING',
     },
 
-    paymentDetails: {
+    paymentDetails: [{
         type: Object,
         required: true
-    },
+    }],
 
     paymentDate: {
-        type: Date,
-        required: true
+        type: Timestamps,
+        default: Date.now,
     },
 
     deliveryAddress: {
