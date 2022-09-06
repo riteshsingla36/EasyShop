@@ -15,6 +15,7 @@ const productSchema = moongoose.Schema({
     stock: {
         type: Number,
         trim: true,
+        min: 0,
         required: true
     },
     category:{

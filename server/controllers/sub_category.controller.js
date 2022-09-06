@@ -10,7 +10,7 @@ const getAllSubCategories = async (req, res) => {
     }
 };
 
-const getSubCategoryById = async (req, res) => {
+const getSubCategory = async (req, res) => {
     try {
         const subCategories = await SubCategory.find({
             category: req.params.id,
@@ -26,31 +26,31 @@ const createSubCategory =  async (req, res) => { // pending
     try {
         const subCategories = await SubCategory.create({
             name: body.name,
-        }).populate('category');
+        });
         res.json({ status: true, data: subCategories });
     } catch (err) {
         res.json({ status: false, message: err.message });
     }
 };
 
-const deleteSubCategoryById = async (req, res) => {
+const deleteSubCategory = async (req, res) => {
     try {
-        const subCategories = await SubCategory.findByIdAndDelete({
+        const subCategory = await SubCategory.findByIdAndDelete({
             category: req.params.id,
-        }).populate('category');
-        res.json({ status: true, data: subCategories });
+        });
+        res.json({ status: true, data: subCategory });
     } catch (err) {
         res.json({ status: false, message: err.message });
     }
 };
 
-const updateSubCategoryById = async (req, res) => {
+const updatecategory = async (req, res) => {
     try {
-        const subCategories = await SubCategory.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate('category');
-        res.json({ status: true, data: subCategories });
+        const subCategory = await SubCategory.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate('category');
+        res.json({ status: true, data: subCategory });
     } catch (err) {
         res.json({ status: false, message: err.message });
     }
 };
 
-module.exports = {getAllSubCategories, getSubCategoryById, createSubCategory, deleteSubCategoryById, updateSubCategoryById};
+module.exports = {getAllSubCategories, getSubCategory, createSubCategory, deleteSubCategory, updatecategory};

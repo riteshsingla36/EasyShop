@@ -1,6 +1,6 @@
 const moongoose = require('mongoose');
 
-const subCategory = mongoose.Schema({
+const subCategorySchema = mongoose.Schema({
     name: {
         type: String,
         trim: true,
@@ -17,4 +17,4 @@ const subCategory = mongoose.Schema({
     }
 )
 
-module.exports = moongoose.model("subcategory", subCategory);
+module.exports = moongoose.model("subcategory", subCategorySchema);

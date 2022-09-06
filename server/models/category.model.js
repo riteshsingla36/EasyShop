@@ -1,6 +1,6 @@
 const moongoose = require('mongoose');
 
-const category = mongoose.Schema({
+const categorySchema = moongoose.Schema({
     name: {
         type: String,
         trim: true,
@@ -13,4 +13,4 @@ const category = mongoose.Schema({
     }
 )
 
-module.exports = moongoose.model("category", category);
+module.exports = moongoose.model("category", categorySchema);
