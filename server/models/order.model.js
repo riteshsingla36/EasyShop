@@ -14,14 +14,13 @@ const orderSchema = mongoose.Schema({
 
     paymentStatus: {
         type: String,
-        enum: ['FAILED', 'CAPTURED', 'SETTLED', 'TRANSFERRED'],
+        enum: ['FAILED', 'CAPTURED', 'SETTLED', 'TRANSFERRED', 'NONE'],
         default: 'CAPTURED',
     },
 
     total: {
         type: Number,
         required: true,
-        default: 0
     },
 
     status: {
@@ -38,7 +37,6 @@ const orderSchema = mongoose.Schema({
 
     paymentDetails: [{
         type: Object,
-        required: true
     }],
 
     paymentDate: {
