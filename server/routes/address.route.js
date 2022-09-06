@@ -11,4 +11,4 @@ router.patch("/:id", AddressController.updateAddress);
 
 router.delete("/:id", AddressController.deleteAddress);
 
-module.exports = router
+module.exports = router;
