@@ -10,7 +10,7 @@ const getAllSubCategories = async (req, res) => {
     }
 };
 
-const getSubCategory = async (req, res) => {
+const getSubCategoriesByCategory = async (req, res) => {
     try {
         const subCategories = await SubCategory.find({
             category: req.params.id,
@@ -26,6 +26,7 @@ const createSubCategory =  async (req, res) => { // pending
     try {
         const subCategories = await SubCategory.create({
             name: body.name,
+            category: body.category,
         });
         res.json({ status: true, data: subCategories });
     } catch (err) {
@@ -53,4 +54,4 @@ const updatecategory = async (req, res) => {
     }
 };
 
-module.exports = {getAllSubCategories, getSubCategory, createSubCategory, deleteSubCategory, updatecategory};
+module.exports = {getAllSubCategories, getSubCategoriesByCategory, createSubCategory, deleteSubCategory, updatecategory};
