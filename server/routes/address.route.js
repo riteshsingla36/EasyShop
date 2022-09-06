@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const AddressController = require('../controllers/address.controller');
 
-router.get("/", AddressController.getAddress);
+router.get("/", AddressController.getAddresses);
 
 router.get("/:id", AddressController.getAddressById);
 

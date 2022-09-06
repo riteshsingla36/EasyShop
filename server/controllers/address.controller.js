@@ -1,7 +1,7 @@
 const express = require('express');
 const AddressSchema = require('../models/address.model');
 
-const getAddress = async (req, res) => {
+const getAddresses = async (req, res) => {
     var q = {};
     if (req.query.user) {
         q["user"] = req.query.user;
@@ -18,41 +18,41 @@ const getAddress = async (req, res) => {
 const getAddressById = async (req, res) => {
     try {
         const address = await AddressSchema.findById(req.params.id).populate('user')
-        res.json(address)
+        res.json({status: true, data: address});
     }
     catch (err) {
-        res.send(err.message)
+        res.json({status: false, data: err.message});
     }
 };
 
 const updateAddress = async (req, res) => {
     try {
         const address = await AddressSchema.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.json(address)
+        res.json({status: true, data: address});
     }
     catch (err) {
-        res.send(err.message)
+        res,json({status: false, data: err.message});
     }
 };
 
 const createAddress = async (req, res) => {
     try {
         const address = await AddressSchema.create(req.body)
-        res.json(address)
+        res.json({status: true, data: address});
     }
     catch (err) {
-        res.send(err.message)
+        res.json({status: false, data: err.message});
     }
 };
 
 const deleteAddress = async (req, res) => {
     try {
         const address = await AddressSchema.findByIdAndDelete(req.params.id)
-        res.json(address)
+        res.json({status: true, data: address});
     }
     catch (err) {
-        res.send(err.message)
+        res.json({status: false, data: err.message});
     }
 };
 
-module.exports = {getAddress, getAddressById, updateAddress, createAddress, deleteAddress};
+module.exports = {getAddresses, getAddressById, updateAddress, createAddress, deleteAddress};
