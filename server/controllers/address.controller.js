@@ -1,4 +1,4 @@
-const AddressSchema = require('../models/address.model');
+const Address = require('../models/address.model');
 
 const getAddresses = async (req, res) => {
     var q = {};
@@ -6,7 +6,7 @@ const getAddresses = async (req, res) => {
         q["user"] = req.query.user;
     }
     try {
-        const addresses = await AddressSchema.find(q).populate('user');
+        const addresses = await Address.find(q);
         res.json({status: true, data: addresses});
     }
     catch (err) {
@@ -16,7 +16,7 @@ const getAddresses = async (req, res) => {
 
 const getAddressById = async (req, res) => {
     try {
-        const address = await AddressSchema.findById(req.params.id).populate('user')
+        const address = await Address.findById(req.params.id);
         res.json({status: true, data: address});
     }
     catch (err) {
@@ -26,7 +26,7 @@ const getAddressById = async (req, res) => {
 
 const updateAddress = async (req, res) => {
     try {
-        const address = await AddressSchema.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        const address = await Address.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json({status: true, data: address});
     }
     catch (err) {
@@ -36,7 +36,7 @@ const updateAddress = async (req, res) => {
 
 const createAddress = async (req, res) => {
     try {
-        const address = await AddressSchema.create(req.body)
+        const address = await Address.create(req.body);
         res.json({status: true, data: address});
     }
     catch (err) {
@@ -46,7 +46,7 @@ const createAddress = async (req, res) => {
 
 const deleteAddress = async (req, res) => {
     try {
-        const address = await AddressSchema.findByIdAndDelete(req.params.id)
+        const address = await Address.findByIdAndDelete(req.params.id);
         res.json({status: true, data: address});
     }
     catch (err) {

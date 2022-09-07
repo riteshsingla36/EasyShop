@@ -9,6 +9,7 @@ const subCategoryRouter = require("./routes/sub_category.route");
 const userRouter = require("./routes/user.route");
 const addressRouter = require("./routes/address.route");
 const productRouter = require("./routes/product.route");
+const cartRouter = require("./routes/cart.route");
 
 dotenv.config({path: "./.env"});
 mongoose.connect(process.env.DB_URI).then(() => console.log("moongoose connected successfully")).catch(error => console.log(error.meaasge));
@@ -21,6 +22,7 @@ app.use("/subcategory", subCategoryRouter);
 app.use("/user", userRouter);
 app.use("/address", addressRouter);
 app.use("/product", productRouter);
+app.use("/cart", cartRouter);
 
 app.listen(8000, console.log("Your app is running in 8000 port"))
 

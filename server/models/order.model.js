@@ -8,7 +8,7 @@ const orderSchema = mongoose.Schema({
 
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'user',
         required: true
     },
 
@@ -25,13 +25,13 @@ const orderSchema = mongoose.Schema({
 
     status: {
         type: String,
-        enum: ['DELIVERED', 'CANCELLED', 'EXPIRED', 'PENDING', 'CONFIRMED'],
+        enum: ['DELIVERED', 'CANCELLED', 'EXPIRED', 'PENDING', 'CONFIRMED', 'PACKED', 'SHIPPED'],
         default: 'PENDING',
     },
 
     deliveryStatus: {
         type: String,
-        enum: ['CANCELLED', 'DELIVERED', 'PENDING', 'CONFIRMED', 'EXPIRED'],
+        enum: ['CANCELLED', 'DELIVERED', 'PENDING', 'CONFIRMED', 'EXPIRED', 'INTRANSIT'],
         default: 'PENDING',
     },
 
