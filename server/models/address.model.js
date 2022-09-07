@@ -6,7 +6,7 @@ const addressSchema = mongoose.Schema({
         trim: true,
         required: true,
     },
-    flat_no: {
+    propertyName: {
         type: String,
         trim: true,
         required: true,

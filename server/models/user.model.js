@@ -1,7 +1,6 @@
-const { default: mongoose } = require('mongoose');
-const moongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-const userSchema = moongoose.Schema({
+const userSchema = mongoose.Schema({
     name: {
         type: String,
         trim: true,

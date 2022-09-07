@@ -6,10 +6,10 @@ router.get('/', SubCategoryController.getAllSubCategories);
 
 router.get('/category/:id', SubCategoryController.getSubCategoriesByCategory);
 
-router.post('/category/:id', SubCategoryController.createSubCategory);
+router.post('/create', SubCategoryController.createSubCategory);
 
-router.delete('/category/:id', SubCategoryController.deleteSubCategory);
+router.delete('/delete/:id', SubCategoryController.deleteSubCategory);
 
-router.patch('/category/:id', SubCategoryController.updatecategory);
+router.patch('/update/:id', SubCategoryController.updatecategory);
 
 module.exports = router;
