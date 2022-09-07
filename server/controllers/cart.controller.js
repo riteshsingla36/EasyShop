@@ -1,5 +1,5 @@
 const express = require('express');
-const cartSchema = require('../models/cart.model');
+const Cart = require('../models/cart.model');
 
 const getCart = async (req, res) => {
     var q = {};
@@ -7,7 +7,7 @@ const getCart = async (req, res) => {
         q["user"] = req.query.user;
     }
     try {
-        const cart = await cartSchema.findOne(q);
+        const cart = await Cart.findOne(q);
         res.json({ status: true, data: cart });
     } catch (err) {
         res.json({ status: false, data: err.message });
@@ -16,7 +16,7 @@ const getCart = async (req, res) => {
 
 const deleteCart = async (req, res) => {
     try {
-        const cart = await cartSchema.findByIdAndDelete(req.params.id);
+        const cart = await Cart.findByIdAndDelete(req.params.id);
         res.json({ status: true, data: cart });
     } catch (err) {
         res.json({ status: false, data: err.message });
@@ -25,7 +25,7 @@ const deleteCart = async (req, res) => {
 
 const createCart = async (req, res) => {
     try {
-        const cart = await cartSchema.create(req.body);
+        const cart = await Cart.create(req.body);
         res.json({ status: true, data: cart });
     } catch (err) {
         res.json({ status: false, data: err.message });
@@ -34,7 +34,7 @@ const createCart = async (req, res) => {
 
 const updateCart =async (req, res) => {
     try {
-        const cart = await cartSchema.findOneAndUpdate(req.params.id, req.body, { new: true });
+        const cart = await Cart.findOneAndUpdate(req.params.id, req.body, { new: true });
         res.json({ status: true, data: cart });
     } catch (err) {
         res.json({ status: false, data: err.message });
