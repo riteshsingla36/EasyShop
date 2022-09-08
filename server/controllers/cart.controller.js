@@ -10,7 +10,7 @@ const getCart = async (req, res) => {
         const cart = await Cart.findOne(q);
         res.json({ status: true, data: cart });
     } catch (err) {
-        res.json({ status: false, data: err.message });
+        res.json({ status: false, message: err.message });
     }
 };
 
@@ -19,7 +19,7 @@ const deleteCart = async (req, res) => {
         const cart = await Cart.findByIdAndDelete(req.params.id);
         res.json({ status: true, data: cart });
     } catch (err) {
-        res.json({ status: false, data: err.message });
+        res.json({ status: false, message: err.message });
     }
 };
 
@@ -28,7 +28,7 @@ const createCart = async (req, res) => {
         const cart = await Cart.create(req.body);
         res.json({ status: true, data: cart });
     } catch (err) {
-        res.json({ status: false, data: err.message });
+        res.json({ status: false, message: err.message });
     }
 };
 
@@ -37,7 +37,7 @@ const updateCart =async (req, res) => {
         const cart = await Cart.findOneAndUpdate(req.params.id, req.body, { new: true });
         res.json({ status: true, data: cart });
     } catch (err) {
-        res.json({ status: false, data: err.message });
+        res.json({ status: false, message: err.message });
     }
 };
 

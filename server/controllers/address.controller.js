@@ -10,14 +10,14 @@ const getAddresses = async (req, res) => {
         res.json({status: true, data: addresses});
     }
     catch (err) {
-        res.json({status: false, data: err.message});
+        res.json({status: false, message: err.message});
     }
 };
 
 const getAddressById = async (req, res) => {
     try {
         const address = await Address.findById(req.params.id);
-        res.json({status: true, data: address});
+        res.json({status: true, message: address});
     }
     catch (err) {
         res.json({status: false, data: err.message});
@@ -30,7 +30,7 @@ const updateAddress = async (req, res) => {
         res.json({status: true, data: address});
     }
     catch (err) {
-        res,json({status: false, data: err.message});
+        res,json({status: false, message: err.message});
     }
 };
 
@@ -40,7 +40,7 @@ const createAddress = async (req, res) => {
         res.json({status: true, data: address});
     }
     catch (err) {
-        res.json({status: false, data: err.message});
+        res.json({status: false, message: err.message});
     }
 };
 
@@ -50,7 +50,7 @@ const deleteAddress = async (req, res) => {
         res.json({status: true, data: address});
     }
     catch (err) {
-        res.json({status: false, data: err.message});
+        res.json({status: false, message: err.message});
     }
 };
 
