@@ -2,73 +2,108 @@ import React from 'react'
 import "./userList.css";
 import { DataGrid } from '@mui/x-data-grid';
 import BlockIcon from '@mui/icons-material/Block';
-import { userRows } from "../../dummyData";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from 'axios';
+import ToastAlert from '../../components/Template/ToastAlert';
+import { baseUrl } from '../../baseUrl';
+
 
 export default function UserList() {
-    const [data, setData] = useState(userRows);
+    const [userData, setUserData] = useState([]);
+    const [showToast, setToast] = useState({ status: false, message: '', severity: '' });
 
-    const handleDelete = (id) => {
-        // setData(data.filter((item) => item.id !== id));
+    const handleBlock = (id, isActive) => {
+        axios.patch(`${baseUrl}/user/update/${id}`, { isActive: !isActive }).then((response) => {
+            if (response.status === 200) {
+                response.data.data.isActive ?
+                    setToast({ status: true, message: `User unblocked successfully`, severity: 'success' }) :
+                    setToast({ status: true, message: `User blocked successfully`, severity: 'success' })
+            }
+        }).catch(error => {
+            setToast({ status: true, message: `Could not complete your request`, severity: 'error' });
+        });
     };
 
+    React.useEffect(() => {
+        axios.get(`${baseUrl}/user/all`).then((response) => {
+            setUserData(response.data.data)
+        })
+    }, [showToast]);
+
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
+        { field: "_id", headerName: "ID", width: 210 },
         {
-            field: "user",
-            headerName: "User",
-            width: 200,
+            field: "name",
+            headerName: "User Name",
+            width: 220,
             renderCell: (params) => {
                 return (
                     <div className="userListUser">
-                        <img className="userListImg" src={params.row.avatar} alt="" />
-                        {params.row.username}
+                        <img className="userListImg" src={params.row.profileImage} alt="" />
+                        {params.row.name}
                     </div>
                 );
             },
         },
-        { field: "email", headerName: "Email", width: 200 },
+        { field: "email", headerName: "Email", width: 250 },
         {
-            field: "status",
-            headerName: "Status",
+            field: "isAdmin",
+            headerName: "Admin",
             width: 120,
+            renderCell: (params) => {
+                return (
+                    <>
+                        <div className="userListUser">
+                            <p>{params.row.isAdmin ? 'Yes' : 'No'}</p>
+                        </div>
+                    </>
+                )
+            }
         },
         {
-            field: "transaction",
-            headerName: "Transaction Volume",
+            field: "phoneNo",
+            headerName: "Phone Number",
+            width: 160,
+        },
+        {
+            field: "gender",
+            headerName: "Gender",
             width: 160,
         },
         {
             field: "action",
-            headerName: "Action",
+            headerName: "Block",
             width: 150,
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={"/user/" + params.row.id}>
-                            <button className="userListEdit">Edit</button>
-                        </Link>
-                        <BlockIcon
-                            className="userListDelete"
-                            onClick={() => handleDelete(params.row.id)}
-                        />
+                        <p onClick={() => handleBlock(params.row._id, params.row.isActive)}>
+                            {params.row.isActive ?
+                                <BlockIcon className="userListDelete" />
+                                :
+                                <button className="userListEdit">Unblock</button>}
+                        </p>
                     </>
                 );
             },
         },
     ];
 
-
+    const toast = (data) => {
+        setToast(data)
+    }
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: "90vh", width: '100%' }}>
+            {showToast.status ? < ToastAlert from_toast={toast} severity={showToast.severity} message={showToast.message} /> : ''}
             <DataGrid
-                rows={data}
+                rows={userData}
                 columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
+                pageSize={15}
+                rowsPerPageOptions={[15]}
+                getRowId={(row) => row._id}
             />
+
         </div>
     );
 }
