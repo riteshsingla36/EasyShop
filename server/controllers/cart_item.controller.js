@@ -16,7 +16,7 @@ const getCartItem = async (req, res) => {
 
 const createCartItem = async (req, res) => {
     try {
-        const cartItem = CartItem.find(req.query.cart).populate("product");
+        const cartItem = CartItem.create(req, res);
         res.json({ status: true, data: cartItem });
     } catch (err) {
         res.json({ status: false, message: err.message });
