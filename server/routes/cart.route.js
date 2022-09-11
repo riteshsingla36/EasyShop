@@ -2,7 +2,7 @@ const express = require('express');
 const cartController = require('../controllers/cart.controller');
 const router = express.Router();
 
-router.get('/:id', cartController.getCart);
+router.get('/', cartController.getCart);
 
 router.delete('/delete/:id', cartController.deleteCart);
 

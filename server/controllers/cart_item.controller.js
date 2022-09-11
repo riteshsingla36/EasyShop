@@ -6,7 +6,7 @@ const getCartItem = async (req, res) => {
         q["cart"] = req.query.cart;
     }
     try {
-        const cartItems = CartItem.find(q).populate("product");
+        const cartItems = await CartItem.find(q).populate("product");
         res.json({ status: true, data: cartItems });
     }
     catch (err) {
@@ -16,7 +16,7 @@ const getCartItem = async (req, res) => {
 
 const createCartItem = async (req, res) => {
     try {
-        const cartItem = CartItem.create(req, res);
+        const cartItem = await CartItem.create(req, res);
         res.json({ status: true, data: cartItem });
     } catch (err) {
         res.json({ status: false, message: err.message });
@@ -25,7 +25,7 @@ const createCartItem = async (req, res) => {
 
 const deleteAllCartItems = async (req, res) => {
     try {
-        const cartItems = CartItem.deleteMany({ cart: req.params.cartid });
+        const cartItems = await CartItem.deleteMany({ cart: req.params.cartid });
         res.json({ status: true, data: cartItems });
     } catch (err) {
         res.json({ status: false, message: err.message });
@@ -34,7 +34,7 @@ const deleteAllCartItems = async (req, res) => {
 
 const deleteCartItem = async (req, res) => {
     try {
-        const cartItem = CartItem.findByIdAndDelete({ cart: req.params.id });
+        const cartItem = await CartItem.findByIdAndDelete({ cart: req.params.id });
         res.json({ status: true, data: cartItem });
     } catch (err) {
         res.json({ status: false, message: err.message });
@@ -43,7 +43,7 @@ const deleteCartItem = async (req, res) => {
 
 const updateCartItem = async (req, res) => {
     try {
-        const cartItem = CartItem.findByIdAndUpdate({ cart: req.params.id }, req.body);
+        const cartItem = await CartItem.findByIdAndUpdate({ cart: req.params.id }, req.body);
         res.json({ status: true, data: cartItem });
     } catch (err) {
         res.json({ status: false, message: err.message });
