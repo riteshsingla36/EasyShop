@@ -32,11 +32,9 @@ export default function EditProdut(props) {
 
     const editSubmit = () => {
         axios.patch(`${baseUrl}/product/update/${props.toEditProduct._id}`, editData).then((response) => {
-            // window.location.reload(false);
+            setToast({ status: true, message: `Product updated successfully`, severity: 'success' })
         }).catch((err) => {
             setToast({ status: true, message: `Could not process the request`, severity: 'error' })
-        }).finally(() => {
-            setToast({ status: true, message: `Product updated successfully`, severity: 'success' })
         })
     }
 
