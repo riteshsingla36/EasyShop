@@ -8,7 +8,7 @@ const ToastAlert = (props) => {
         props.from_toast({ status: false, message: '', severity: '' })
     }
     return (
-        <Stack sx={{ width: '30%' }} spacing={2}>
+        <Stack sx={{ width: '20rem' }} spacing={2}>
             <Alert severity={props.severity} onClose={() => { oncloseHandler() }}>{props.message}</Alert>
         </Stack>
     );
