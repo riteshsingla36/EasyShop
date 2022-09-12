@@ -31,19 +31,18 @@ export default function UserList() {
     }, [showToast]);
 
     const columns = [
-        { field: "_id", headerName: "ID", width: 210 },
+        { field: "_id", headerName: "ID", width: 210 }, {
+            field: 'profileImage',
+            headerName: 'Profile Picture',
+            width: 200,
+            renderCell: (params) => {
+                return <img className="userListImg" src={params.row.profileImage} />
+            }
+        },
         {
             field: "name",
             headerName: "User Name",
             width: 220,
-            renderCell: (params) => {
-                return (
-                    <div className="userListUser">
-                        <img className="userListImg" src={params.row.profileImage} alt="" />
-                        {params.row.name}
-                    </div>
-                );
-            },
         },
         { field: "email", headerName: "Email", width: 250 },
         {
