@@ -14,8 +14,15 @@ const cloudinaryImageUploadMethod = async file => {
   }
   
 const getProducts = async (req, res) => {
+    const query = {}
+    if(req.query.category) {
+        query.category = req.query.category
+    }
+    if(req.query.subcategory) {
+        query.subCategory = req.query.subcategory
+    }
     try {
-        const products = await Product.find({});
+        const products = await Product.find(query);
         res.json({status: true, data: products});
     }
     catch(e) {

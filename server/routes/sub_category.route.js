@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', SubCategoryController.getAllSubCategories);
 
-router.get('/category/:id', SubCategoryController.getSubCategoriesByCategory);
+router.get('/:id', SubCategoryController.getSubCategoriesByCategory);
 
 router.post('/create', SubCategoryController.createSubCategory);
 
