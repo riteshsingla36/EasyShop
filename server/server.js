@@ -11,12 +11,19 @@ const addressRouter = require("./routes/address.route");
 const productRouter = require("./routes/product.route");
 const cartRouter = require("./routes/cart.route");
 const cartItemRouter = require("./routes/cart_item.route");
+const cloudinary = require('cloudinary').v2;
 
-dotenv.config({path: "./.env"});
+dotenv.config({ path: "./.env" });
 mongoose.connect(process.env.DB_URI).then(() => console.log("moongoose connected successfully")).catch(error => console.log(error.meaasge));
 app.use(express.json());
 app.use(cors());
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true
+});
 
 app.use("/category", categoryRouter);
 app.use("/subcategory", subCategoryRouter);
@@ -26,5 +33,5 @@ app.use("/product", productRouter);
 app.use("/cart", cartRouter);
 app.use("/cartitem", cartItemRouter);
 
-app.listen(8000, console.log("Your app is running in 8000 port"))
+app.listen(8000, console.log("Your app is running in 8000 port"));
 
