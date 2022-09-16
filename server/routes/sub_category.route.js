@@ -10,6 +10,6 @@ router.post('/create', SubCategoryController.createSubCategory);
 
 router.delete('/delete/:id', SubCategoryController.deleteSubCategory);
 
-router.patch('/update/:id', SubCategoryController.updatecategory);
+router.patch('/update/:id', SubCategoryController.updateSubCategory);
 
 module.exports = router;

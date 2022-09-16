@@ -42,7 +42,7 @@ const deleteSubCategory = async (req, res) => {
     }
 };
 
-const updatecategory = async (req, res) => {
+const updateSubCategory = async (req, res) => {
     try {
         const subCategory = await SubCategory.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate('category');
         res.json({ status: true, data: subCategory });
@@ -51,4 +51,4 @@ const updatecategory = async (req, res) => {
     }
 };
 
-module.exports = {getAllSubCategories, getSubCategoriesByCategory, createSubCategory, deleteSubCategory, updatecategory};
+module.exports = {getAllSubCategories, getSubCategoriesByCategory, createSubCategory, deleteSubCategory, updateSubCategory};
