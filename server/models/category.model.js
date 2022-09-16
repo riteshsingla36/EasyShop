@@ -4,6 +4,7 @@ const categorySchema = moongoose.Schema({
     name: {
         type: String,
         trim: true,
+        unique: true,
         required: true,
     }
 },

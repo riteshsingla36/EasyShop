@@ -1,8 +1,28 @@
 const Product = require('../models/product.model');
+const cloudinary = require('cloudinary').v2;
 
+const cloudinaryImageUploadMethod = async file => {
+    return new Promise(resolve => {
+        cloudinary.uploader.upload( file , (err, res) => {
+          if (err) return res.status(500).send("upload image error");
+            resolve({
+              res: res.secure_url
+            }) 
+          }
+        ) 
+    })
+  }
+  
 const getProducts = async (req, res) => {
+    const query = {}
+    if(req.query.category) {
+        query.category = req.query.category
+    }
+    if(req.query.subcategory) {
+        query.subCategory = req.query.subcategory
+    }
     try {
-        const products = await Product.find({});
+        const products = await Product.find(query);
         res.json({status: true, data: products});
     }
     catch(e) {
@@ -21,15 +41,22 @@ const getProduct = async (req, res) => {
 }
 
 const createProduct = async (req, res) => {
+    
     const name = req.body.name;
     const price = req.body.price;
     const stock = req.body.stock;
     const category = req.body.category;
     const subCategory = req.body.subCategory;
     const description = req.body.description;
-    const images = req.body.images;
+    const urls = [];
+        const files = req.files;
+        for (const file of files) {
+          const { path } = file;
+          const newPath = await cloudinaryImageUploadMethod(path)
+          urls.push(newPath)
+    }
     try {
-        const product = await Product.create({name: name, price: price, stock: stock, category: category, subCategory: subCategory, description: description, images: images});
+        const product = await Product.create({name: name, price: price, stock: stock, category: category, subCategory: subCategory, description: description, images: urls.map( url => url.res )});
         res.json({status: true, data: product});
     }
     catch(e) {
