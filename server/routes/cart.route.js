@@ -6,7 +6,7 @@ router.get('/:id', cartController.getCart);
 
 router.delete('/delete/:id', cartController.deleteCart);
 
-router.post('/create/:id', cartController.createCart);
+router.post('/create', cartController.createCart);
 
 router.patch('/update/:id', cartController.updateCart);
 
