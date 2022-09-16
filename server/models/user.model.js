@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
     profileImage: {
         type: String,
         trim: true,
-        default: 'https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg'
+        default: 'https://svgsilh.com/svg/659651.svg'
     },
     isAdmin: {
         type: Boolean,
