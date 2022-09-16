@@ -26,12 +26,12 @@ const signUpHandler = async (req, res) => {
     const gender = req.body.gender;
     const phoneNo = req.body.phoneNo;
     const profileImage = req.file.path;
-    if(password.length < 6){
+    if(password.length < 8){
         res.json({status: false, message: "Password too short"});
         return ;
     }
     if(password !== confirmPassword){
-        res.json({status: false, message: 'Passwords do not match'});
+        res.json({status: false, message: 'Passwords & Confirmed Password do not match'});
         return;
     }
     try {
