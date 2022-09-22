@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
-
+const fs = require('fs');
+const { url } = require('inspector');
 const loginHandler = async (req, res) => {
     const { email, password } = req.body;
     try{
@@ -26,6 +27,9 @@ const signUpHandler = async (req, res) => {
     const gender = req.body.gender;
     const phoneNo = req.body.phoneNo;
     const profileImage = req.file.path;
+
+    console.log(req.body);
+
     if(password.length < 8){
         res.json({status: false, message: "Password too short"});
         return ;
@@ -35,8 +39,7 @@ const signUpHandler = async (req, res) => {
         return;
     }
     try {
-        const user = await User.create({name, email, password, gender,phoneNo, profileImage});
-
+        const user = await User.create({name, email, password, gender, phoneNo, profileImage});
         res.json({status: true, data: user});
     }
     catch(e) {
