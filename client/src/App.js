@@ -1,7 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/home/Home";
+import LogIn from "./pages/login/LogIn";
 import ProductList from "./pages/products/ProductList";
+import Register from "./pages/register/Register";
 import UserList from "./pages/userList/UserList";
 import LandingPage from "./pages/user/LandingPage";
 import ProductDetail from "./pages/user/productDetail/ProductDetail";
