@@ -5,6 +5,6 @@ const upload = require("../middlewares/cloudinary");
 
 router.post('/login', OnBoarding.loginHandler);
 
-router.post('/signup', upload.single('profileImage', 1),OnBoarding.signUpHandler);
+router.post('/signup', upload.single('profileImage'),OnBoarding.signUpHandler);
 
 module.exports = router;
