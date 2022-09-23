@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ['MALE', 'FEMALE'],
+        enum: ['MALE', 'FEMALE', 'OTHER'],
         required: true
     },
     phoneNo : {
@@ -45,7 +45,7 @@ const userSchema = mongoose.Schema({
 },
     {
         versionKey: false,
-        timeStamp: true,
+        timestamps: true,
     }
 )
 

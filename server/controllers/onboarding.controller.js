@@ -1,8 +1,10 @@
 const User = require('../models/user.model');
-const fs = require('fs');
-const { url } = require('inspector');
+
 const loginHandler = async (req, res) => {
     const { email, password } = req.body;
+    if(!email || !password) {
+        res.json({status: false, message: "Email Or Password is required"});
+    }
     try{
         const user = await User.findOne({email: email});
         if(!user){
@@ -28,7 +30,6 @@ const signUpHandler = async (req, res) => {
     const phoneNo = req.body.phoneNo;
     const profileImage = req.file.path;
 
-    console.log(req.body);
 
     if(password.length < 8){
         res.json({status: false, message: "Password too short"});
@@ -36,6 +37,10 @@ const signUpHandler = async (req, res) => {
     }
     if(password !== confirmPassword){
         res.json({status: false, message: 'Passwords & Confirmed Password do not match'});
+        return;
+    }
+    if(phoneNo.length <10) {
+        res.json({status: false, message: 'Phone number must be 10 characters long'});
         return;
     }
     try {

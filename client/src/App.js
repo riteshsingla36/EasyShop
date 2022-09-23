@@ -18,6 +18,8 @@ function App() {
         <Route path="admin/products" element={<ProductList />}></Route>
         <Route path="/" element={<LandingPage />} />
         <Route path="/productdetail/:productId" element={<ProductDetail />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

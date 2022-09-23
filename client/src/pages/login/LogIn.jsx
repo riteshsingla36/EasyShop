@@ -1,30 +1,43 @@
-import React from 'react'
-import "./logIn.css"
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../baseUrl';
+import "./logIn.css";
 
 const LogIn = () => {
-
-    const play = () => {
-        const name = document.getElementById('name').value
-        const tel  = document.getElementById('tel').value
-        console.log('Play', name, tel)
-    }
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const loginHandler = (e) => {
+    e.preventDefault();
+    axios.post(`${baseUrl}/auth/login`, {email: email, password: password}).then(res => {
+      if(!res.data.status) {
+        alert(res.data.message);
+      }
+      else {
+        alert("successfully logged in");
+        navigate("/");
+      }
+    })
+  }
   return (
     <div>
        <div className="login-wrapper">
-      <form className="form">
+      <form className="form" onSubmit={loginHandler}>
         <h2>Login</h2>
         <div className="input-group">
-          <input type="email" name="loginUser" id="loginUser" required />
-          <label for="loginUser">Email</label>
+          <input type="email" name="loginUser" id="loginUser" onChange={(e) => setEmail(e.target.value)} required />
+          <label htmlFor="loginUser">Email</label>
         </div>
         <div className="input-group">
           <input
             type="password"
             name="loginPassword"
             id="loginPassword"
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <label for="loginPassword">Password</label>
+          <label htmlFor="loginPassword">Password</label>
         </div>
         <input type="submit" value="Login" className="submit-btn" />
       </form>
@@ -33,4 +46,4 @@ const LogIn = () => {
   )
 }
 
-export default LogIn
+export default LogIn;

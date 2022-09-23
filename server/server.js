@@ -6,19 +6,17 @@ const app = express();
 const cloudinary = require('cloudinary').v2;
 const session = require('express-session')
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 
 app.use(express.json());
 app.use(cors());
-app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(session({  
+app.use(session({
   secret: 'tdfnkcyrdrcc',  
   resave: false,
   saveUninitialized: true,
-  cookie: { 
+  cookie: {
     maxAge: 3600000 // 1 min
   } 
 }));
@@ -34,7 +32,6 @@ const onBoarding = require('./routes/onboarding.route');
 
 dotenv.config({ path: "./.env" });
 mongoose.connect(process.env.DB_URI).then(() => console.log("moongoose connected successfully")).catch(error => console.log(error.meaasge));
-
 
 
 cloudinary.config({
