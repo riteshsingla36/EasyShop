@@ -4,10 +4,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useState } from "react";
 import axios from 'axios';
-import ToastAlert from '../../components/Template/ToastAlert';
-import { baseUrl } from '../../baseUrl';
-import ModalComp from '../../components/Template/Modal/ModalComp';
-import EditProduct from '../../components/products/EditProduct';
+import ToastAlert from '../../../components/Template/ToastAlert';
+import { baseUrl } from '../../../baseUrl';
+import ModalComp from '../../../components/Template/Modal/ModalComp';
+import EditProduct from '../../../components/admin_components/products/EditProduct';
 
 
 export default function ProductList() {

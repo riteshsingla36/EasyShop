@@ -15,8 +15,12 @@ const getCartItem = async (req, res) => {
 };
 
 const createCartItem = async (req, res) => {
+    const product = req.body.product;
+    const user = req.body.user;
+    const quantity = req.body.quantity || 1;
+
     try {
-        const cartItem = await CartItem.create(req, res);
+        const cartItem = await CartItem.create({product: product, quantity: quantity, user: user});
         res.json({ status: true, data: cartItem });
     } catch (err) {
         res.json({ status: false, message: err.message });

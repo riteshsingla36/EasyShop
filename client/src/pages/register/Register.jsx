@@ -8,6 +8,15 @@ const Register = () => {
     const [image , setImage] = useState("");
     const navigate = useNavigate();
 
+    const updateImage = (e) =>{
+        if(e.target.files[0].size > 1000000) {
+            e.target.value = "";
+            alert("please selece image less then 1000000");
+        }
+        else {
+            setImage(e.target.files[0]);
+        }
+    }
     const registerHandler = (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -65,12 +74,18 @@ const Register = () => {
 
                         <tr>
                             <td><label htmlFor="gender">Gender: </label></td>
-                            <td><input id="rollno" maxLength="50" name="gender" type="text" required/></td>
+                            <td>
+                                <select name="gender" id="gender">
+                                    <option value="MALE">MALE</option>
+                                    <option value="FEMALE">FEMALE</option>
+                                    <option value="OTHER">OTHER</option>
+                                </select>
+                            </td>
                         </tr>
 
                         <tr>
                             <td><label htmlFor="profileImage">Profile Image</label></td>
-                            <td><input type="file" name="profileImage" id='profileImage' accept=".png, .jpg, .jpeg" onChange={(e) => setImage(e.target.files[0])}/></td>
+                            <td><input type="file" name="profileImage" id='profileImage' accept=".png, .jpg, .jpeg" onChange={e=> updateImage(e)}/></td>
                         </tr>
 
                         <tr>

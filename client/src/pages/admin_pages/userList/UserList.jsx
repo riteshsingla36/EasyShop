@@ -4,8 +4,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import BlockIcon from '@mui/icons-material/Block';
 import { useState } from "react";
 import axios from 'axios';
-import ToastAlert from '../../components/Template/ToastAlert';
-import { baseUrl } from '../../baseUrl';
+import ToastAlert from '../../../components/Template/ToastAlert';
+import { baseUrl } from '../../../baseUrl';
 
 
 export default function UserList() {

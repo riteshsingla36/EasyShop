@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import { baseUrl } from '../../baseUrl';
-import ToastAlert from '../Template/ToastAlert';
+import { baseUrl } from '../../../baseUrl';
+import ToastAlert from '../../Template/ToastAlert';
 import './editProduct.css'
 
 export default function EditProdut(props) {

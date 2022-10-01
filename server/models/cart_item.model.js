@@ -12,9 +12,9 @@ const cartItemSchema = mongoose.Schema({
         min: [1, "quantity has to be greater than or equal to 1"],
         default: 1
     },
-    cart: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "cart",
+        ref: "user",
         required: true
     }
 },
