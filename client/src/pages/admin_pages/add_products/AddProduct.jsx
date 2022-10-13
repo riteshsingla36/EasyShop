@@ -57,7 +57,7 @@ const AddProduct = () => {
         const image = productImages;
         console.log(image, "rit");
         const formData = new FormData();
-        
+
         formData.append("name", name);
         formData.append("price", price);
         formData.append("stock", stock);
@@ -66,16 +66,16 @@ const AddProduct = () => {
         formData.append("description", description);
         formData.append("image", image);
         axios.post(`${baseUrl}/product/create`, formData)
-        .then(res => {
-            if(res.data.status) {
-                alert("product created successfully");
-            }
-            else {
-                alert(res.data.message);
-            }
-        }).catch(err => {
-            alert(err.message);
-        })
+            .then(res => {
+                if (res.data.status) {
+                    alert("product created successfully");
+                }
+                else {
+                    alert(res.data.message);
+                }
+            }).catch(err => {
+                alert(err.message);
+            })
     }
     return (
         <div>
@@ -129,7 +129,7 @@ const AddProduct = () => {
 
                         <tr>
                             <td><label htmlFor="images">Images: </label></td>
-                            <td><input id="images" name="images" type="file" multiple="multiple" onChange={e => updateImages(e)} required /></td>
+                            <td><input id="images" name="images" type="file" accept=".png, .jpg, .jpeg" multiple="multiple" onChange={e => updateImages(e)} required /></td>
                         </tr>
 
                         <tr>
