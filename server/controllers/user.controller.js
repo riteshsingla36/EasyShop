@@ -1,5 +1,6 @@
 const User = require("../models/user.model")
 
+// to show all users to admin
 const getUsers = async (req, res) => {
     try {
         const users = await User.find({});
@@ -10,6 +11,7 @@ const getUsers = async (req, res) => {
     }
 }
 
+// to get single user details to show to admin or to show in profile page
 const getUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -20,6 +22,7 @@ const getUser = async (req, res) => {
     }
 }
 
+// to update the details of user by the himself or to block the user by admin
 const updateUser = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
