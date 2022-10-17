@@ -36,7 +36,7 @@ const loginHandler = async (req, res) => {
 const signUpHandler = async (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
-    const password = req.body.password;
+    let password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
     const gender = req.body.gender;
     const phoneNo = req.body.phoneNo;
