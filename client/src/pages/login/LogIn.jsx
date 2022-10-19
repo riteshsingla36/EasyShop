@@ -1,6 +1,7 @@
+import { color, fontWeight } from '@mui/system';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl';
 import styles from "./logIn.module.css";
 
@@ -20,6 +21,7 @@ const LogIn = () => {
       }
     })
   }
+
   return (
     <>
       <div className={styles.login_box}>
@@ -41,6 +43,12 @@ const LogIn = () => {
             Submit
           </button>
         </form>
+        <div className='not-reg' style={{position:'relative', display:'block', textAlign:'center'}}>
+            <span style={{cursor:'pointer', color:'#fff', fontWeight:'bold', marginTop:'2rem', display:'block'}} >Forgot password?</span>
+            <br />
+            <br />
+            <span style={{color: '#fff', }}>Not Registerd Yet! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <Link to='/register' style={{color:'#fff', textDecoration:'none', fontWeight:'bold'}}>Register Here</Link>
+        </div>
       </div>
     </>
   )
