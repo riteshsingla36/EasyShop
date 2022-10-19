@@ -57,7 +57,15 @@ const userSchema = mongoose.Schema({
     resetPasswordExpiresIn: {
         type: Date,
         required: false
-    }
+    },
+    lastLogin: {
+        type: Date,
+        default: Date.now
+    },
+    lastUpadteChecked: {
+        type: Date,
+        default: Date.now
+    },
 },
     {
         versionKey: false,
