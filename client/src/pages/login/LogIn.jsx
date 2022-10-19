@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl';
 import styles from "./logIn.module.css";
 
@@ -20,6 +20,7 @@ const LogIn = () => {
       }
     })
   }
+
   return (
     <>
       <div className={styles.login_box}>
@@ -41,6 +42,12 @@ const LogIn = () => {
             Submit
           </button>
         </form>
+        <div className={styles.not_reg}>
+            <span className={styles.forgot} >Forgot password?</span>
+            <br />
+            <br />
+            <span>Not Registerd Yet! &nbsp;&nbsp;</span> <Link to='/register' style={{color:'#fff', fontWeight:'bold'}}>Register Here</Link>
+        </div>
       </div>
     </>
   )

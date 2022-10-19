@@ -1,59 +1,77 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { baseUrl } from '../../baseUrl';
 import { useNavigate } from 'react-router-dom';
 import styles from  "./register.module.css";
 
 const Register = () => {
-    const [image, setImage] = useState("");
+    const [profileImage, setProfileImage] = useState('');
+    useEffect(() => {
+        const auth = document.cookie?.split('; ')?.find((row) => row.startsWith('email'))?.split('=')[1];
+        if(auth){
+            navigate('/admin');
+        }
+    }, []);
+
     const navigate = useNavigate();
 
     const updateImage = (e) => {
-        if (e.target.files[0].size > 1000000) {
-            e.target.value = "";
-            alert("please selece image less then 1000000");
-        }
-        else {
-            setImage(e.target.files[0]);
+        let fileReader;
+        const file = e.target.files[0];
+        if (file) {
+            fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = (e) => {
+              const { result } = e.target;
+              if (result) {
+                setProfileImage(result)
+              }
+            }
         }
     }
-    const registerHandler = (e) => {
+
+    const register = (e) => {
         e.preventDefault();
-        const formData = new FormData();
         const name = e.target.name.value;
         const email = e.target.email.value;
         const phoneNo = e.target.phoneNo.value;
-        const profileImage = image;
         const gender = e.target.gender.value;
+        const cpassword = e.target.cpassword.value;
         const password = e.target.password.value;
-        const confirmPassword = e.target.cpassword.value;
+        if (email === "") {
+            alert("please provide email");
+            return;
+        }
 
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('phoneNo', phoneNo);
-        formData.append('profileImage', profileImage);
-        formData.append('gender', gender);
-        formData.append('password', password);
-        formData.append('confirmPassword', confirmPassword);
-        axios.post(`${baseUrl}/auth/signup`, formData).then(res => {
-            if (!res.data.status) {
-                alert(res.data.message);
-            }
-            else {
-                alert("successfully registered")
-                navigate("/login")
-            }
-        }).catch(err => {
-            alert("error: " + err.message);
-        });
-        
-    };
+        if(password !== cpassword){
+            alert("Confirm password is incorrect");
+            return;
+        }  
 
+        axios.post(`${baseUrl}/auth/signup`, { name: name, email: email, phoneNo: phoneNo, gender: gender, profileImage: profileImage, password: password, confirmPassword: cpassword})
+            .then(res => {
+                if (res.data.status) {
+                    alert("Register successfully");
+                    e.target.name.value = "";
+                    e.target.email.value = "";
+                    e.target.gender.value = "";
+                    e.target.phoneNo.value = "";
+                    e.target.password.value = "";
+                    e.target.profileImage = "";
+                    navigate('/login');
+                }
+                else {
+                    alert(res.data.message);
+                }
+            }).catch(err => {
+                alert(err.message);
+            })
+    }
     return (
         <>
             <div className={styles.login_box}>
                 <h2>Register</h2>
-                <form onSubmit={registerHandler}>
+                <form onSubmit={register}>
                     <div className={styles.user_box}>
                         <input type="text" name="name" id='name' required="" />
                         <label>Name</label>
@@ -75,7 +93,7 @@ const Register = () => {
                         <label>Gender</label>
                     </div>
                     <div className={styles.user_box}>
-                        <input type="file" name="" id='' onChange={e => updateImage(e)} />
+                        <input type="file" name="profileImage" id='profileImage' onChange={e => updateImage(e)} />
                         <label>Profile Image</label>
                     </div>
                     <div className={styles.user_box}>
