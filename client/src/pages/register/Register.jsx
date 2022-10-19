@@ -15,7 +15,7 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const updateImages = (e) => {
+    const updateImage = (e) => {
         let fileReader;
         const file = e.target.files[0];
         if (file) {
@@ -58,7 +58,7 @@ const Register = () => {
                     e.target.phoneNo.value = "";
                     e.target.password.value = "";
                     e.target.profileImage = "";
-                    navigate('/admin');
+                    navigate('/login');
                 }
                 else {
                     alert(res.data.message);
@@ -93,7 +93,7 @@ const Register = () => {
                         <label>Gender</label>
                     </div>
                     <div className={styles.user_box}>
-                        <input type="file" name="profileImage" id='profileImage' onChange={e => updateImages(e)} />
+                        <input type="file" name="profileImage" id='profileImage' onChange={e => updateImage(e)} />
                         <label>Profile Image</label>
                     </div>
                     <div className={styles.user_box}>

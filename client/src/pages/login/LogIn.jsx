@@ -1,4 +1,3 @@
-import { color, fontWeight } from '@mui/system';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -43,11 +42,11 @@ const LogIn = () => {
             Submit
           </button>
         </form>
-        <div className='not-reg' style={{position:'relative', display:'block', textAlign:'center'}}>
-            <span style={{cursor:'pointer', color:'#fff', fontWeight:'bold', marginTop:'2rem', display:'block'}} >Forgot password?</span>
+        <div className={styles.not_reg}>
+            <span className={styles.forgot} >Forgot password?</span>
             <br />
             <br />
-            <span style={{color: '#fff', }}>Not Registerd Yet! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <Link to='/register' style={{color:'#fff', textDecoration:'none', fontWeight:'bold'}}>Register Here</Link>
+            <span>Not Registerd Yet! &nbsp;&nbsp;</span> <Link to='/register' style={{color:'#fff', fontWeight:'bold'}}>Register Here</Link>
         </div>
       </div>
     </>

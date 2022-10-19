@@ -62,7 +62,7 @@ const userSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    lastUpadteChecked: {
+    lastUpdateChecked: {
         type: Date,
         default: Date.now
     },
