@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const { sendMail } = require('../middlewares/email-sender');
+const cloudinary = require('cloudinary').v2;
 
 const loginHandler = async (req, res) => {
     const { email, password } = req.body;
@@ -36,12 +37,12 @@ const loginHandler = async (req, res) => {
 const signUpHandler = async (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
-    const password = req.body.password;
+    let password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
     const gender = req.body.gender;
     const phoneNo = req.body.phoneNo;
-    const profileImage = req.file.path;
     const verificationCode = crypto.randomBytes(20).toString('hex');
+    const profileImage = req.body.profileImage;
 
     if (password.length < 8) {
         return res.json({ status: false, message: "Password too short" });
@@ -67,7 +68,17 @@ const signUpHandler = async (req, res) => {
 
     password = await bcrypt.hash(password, 10);
     try {
-        const user = await User.create({ name, email, password, gender, phoneNo, profileImage, verificationCode });
+        let user;
+        if(profileImage !== '' && profileImage !== undefined){
+            let image;
+            const result = await cloudinary.uploader.upload(profileImage, {
+                folder: "profileImage",
+            },);
+            image = result.secure_url;
+            user = await User.create({ name, email, password, gender, phoneNo, profileImage, verificationCode });
+        }else{
+            user = await User.create({ name, email, password, gender, phoneNo, verificationCode });
+        }
         let html = `
         <div>
             <h1>Hello, ${user.name}</h1>
