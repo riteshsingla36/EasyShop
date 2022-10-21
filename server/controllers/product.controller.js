@@ -41,22 +41,24 @@ const getProduct = async (req, res) => {
 }
 
 const createProduct = async (req, res) => {
-
     const name = req.body.name;
     const price = req.body.price;
     const stock = req.body.stock;
     const category = req.body.category;
     const subCategory = req.body.subCategory;
     const description = req.body.description;
-    const urls = [];
-    const files = req.files;
-    for (const file of files) {
-        const { path } = file;
-        const newPath = await cloudinaryImageUploadMethod(path)
-        urls.push(newPath)
-    }
+    let images = [...req.body.images];
+
     try {
-        const product = await Product.create({ name: name, price: price, stock: stock, category: category, subCategory: subCategory, description: description, images: urls.map(url => url.res) });
+        let imagesBuffer = [];
+
+        for (let i = 0; i < images.length; i++) {
+            const result = await cloudinary.uploader.upload(images[i], {
+                folder: "ProductsImages",
+            });
+            imagesBuffer.push(result.secure_url)
+        }
+        const product = await Product.create({ name: name, price: price, stock: stock, category: category, subCategory: subCategory, description: description, images: imagesBuffer });
         res.json({ status: true, data: product });
     }
     catch (e) {
