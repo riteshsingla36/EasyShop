@@ -21,6 +21,24 @@ const LogIn = () => {
     })
   }
 
+  const forgotPassword = () => {
+    if(email === "") {
+        alert("Please enter your email");
+        return;
+    }
+    axios.post(`${baseUrl}/auth/reset-password`, {email: email}).then((res) => {
+        if(!res.data.status) {
+            alert(res.data.message);
+        }
+        else {
+            alert(res.data.message);
+        }
+    })
+    .catch(err => {
+        alert(err.message);
+    })
+} 
+
   return (
     <>
       <div className={styles.login_box}>
@@ -43,7 +61,7 @@ const LogIn = () => {
           </button>
         </form>
         <div className={styles.not_reg}>
-            <span className={styles.forgot} >Forgot password?</span>
+            <span className={styles.forgot} onClick={forgotPassword}>Forgot password?</span>
             <br />
             <br />
             <span>Not Registerd Yet! &nbsp;&nbsp;</span> <Link to='/register' style={{color:'#fff', fontWeight:'bold'}}>Register Here</Link>
