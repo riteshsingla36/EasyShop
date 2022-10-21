@@ -35,15 +35,19 @@ const AddProduct = () => {
         });
     }
     const updateImages = (e) => {
-        const images = e.target.files;
-        for (let image of images) {
-            if (image.size > 1000000) {
+        const files = Array.from(e.target.files);
+        files.forEach(file => {
+            if (file.size > 1000000) {
                 e.target.value = "";
-                alert("image size can not be greater than 1000000");
+                alert("image size can not be greater than 1MB");
                 return;
             }
-        }
-        setProductImages(images);
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setProductImages(oldArray => [...oldArray, reader.result])
+            }
+        })
     }
 
     const addProductHandler = (e) => {
@@ -54,18 +58,8 @@ const AddProduct = () => {
         const category = e.target.category.value;
         const subcategory = e.target.subcategory.value;
         const description = e.target.description.value;
-        const image = productImages;
-        console.log(image, "rit");
-        const formData = new FormData();
-
-        formData.append("name", name);
-        formData.append("price", price);
-        formData.append("stock", stock);
-        formData.append("category", category);
-        formData.append("subCategory", subcategory);
-        formData.append("description", description);
-        formData.append("image", image);
-        axios.post(`${baseUrl}/product/create`, formData)
+        const images = productImages;
+        axios.post(`${baseUrl}/product/create`, {name: name, price: price, stock: stock, category: category, subCategory: subcategory, description: description, images: images})
             .then(res => {
                 if (res.data.status) {
                     alert("product created successfully");
