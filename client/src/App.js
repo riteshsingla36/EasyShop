@@ -8,6 +8,8 @@ import UserList from "./pages/admin_pages/userList/UserList";
 import LandingPage from "./pages/user/LandingPage";
 import ProductDetail from "./pages/user/productDetail/ProductDetail";
 import AddProduct from "./pages/admin_pages/add_products/AddProduct";
+import Verify from "./pages/verify/Verify";
+import ResetPassword from "./pages/reset_password/ResetPassword";
 
 function App() {
   return (
@@ -22,7 +24,8 @@ function App() {
         <Route path="/productdetail/:productId" element={<ProductDetail />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/verify/:verifytoken" element={<Verify />} />
+        <Route path="/reset-password/:resetpasswordtoken" element={<ResetPassword />} />
       </Routes>
     </div>
   );

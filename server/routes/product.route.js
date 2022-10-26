@@ -7,7 +7,7 @@ router.get("/", productController.getProducts);
 
 router.get("/:id", productController.getProduct);
 
-router.post("/create", upload.array("image", 10), productController.createProduct);
+router.post("/create", productController.createProduct);
 
 router.patch("/update/:id", productController.updateProduct);
 
